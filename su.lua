@@ -10,6 +10,6 @@
 
 ]]--
 
-function isempty(s)
+function isEmpty(s)
   return s == nil or s == ''
 end
