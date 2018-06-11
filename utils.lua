@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 11 Jun 2018 - 07:47 PM
+  Date: Edited 11 Jun 2018 - 07:52 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/utils.lua
   
@@ -32,4 +32,24 @@ end
 
 function getRunningProgramWithPathAndExtension(shell)
   return shell.getRunningProgram()
+end
+
+function exit()
+	error()
+end
+
+function get2FAosTime1s()  --changes every ~1 second
+	return get2FAosTime(3)
+end
+
+function get2FAosTime5s()  --changes every ~5 second
+	return get2FAosTime(2)
+end
+
+function get2FAosTime(exponent)
+	return math.ceil(os.time() * math.pow(10, exponent))
+end
+
+function get2FAseed(salt)
+	return get2FAosTime(0.75) * su.sumString(salt)
 end
