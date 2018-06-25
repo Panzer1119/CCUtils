@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 10:22 PM
+  Date: Edited 25 Jun 2018 - 11:31 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/files.lon
   
@@ -33,10 +33,5 @@
 		name = "rednet_utils.lua",
 		path = "lib/rednet_utils.lua",
 		url = "https://raw.githubusercontent.com/Panzer1119/CCUtils/master/lib/rednet_utils.lua"
-	},
-	{
-		name = "array_utils.lua",
-		path = "lib/array_utils.lua",
-		url = "https://raw.githubusercontent.com/Panzer1119/CCUtils/master/lib/array_utils.lua"
 	}
 }
