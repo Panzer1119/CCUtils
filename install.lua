@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:50 PM
+  Date: Edited 25 Jun 2018 - 08:51 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/install.lua
   
@@ -61,9 +61,9 @@ if (installed) then
 	print("")
 	print("Installation was successful, do you want to")
 	print("delete the cache and installation files?")
-	write("(the installation file can be used to update the library) (Y/n): ")
+	write("(the installation file can be used to update the library) (yes/n): ")
 	local input = read()
-	if (input == "Y") then
+	if (input == "yes") then
 		fs.delete(filename_files)
 		fs.delete(shell.getRunningProgram())
 	end
