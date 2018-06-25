@@ -2,11 +2,11 @@
 
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 07:44 PM
+  Date: Edited 25 Jun 2018 - 08:27 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
-  Direct Download: https://raw.githubusercontent.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
+  Direct Download: https://raw.githubusercontent.com/Panzer1119/CCUtils/master/lib/utils.lua
 
 ]]--
 
