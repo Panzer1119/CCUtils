@@ -10,6 +10,10 @@
 
 os.loadAPI("lib/utils.lua")
 
+args = {...}
+
+protocol = "shell_server"
+
 whitelist = {}
 blacklist = {}
 
@@ -69,6 +73,14 @@ end
 
 reloadLists()
 
-while true do
-
+if (#args >= 1) then
+	protocol = args[1]
 end
+
+rednet.host(protocol)
+
+while true do
+	local sid, msg, ptc = rednet.receive(protocol)
+end
+
+rednet.unhost(protocol)
