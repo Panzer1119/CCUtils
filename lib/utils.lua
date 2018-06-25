@@ -12,6 +12,8 @@
 
 os.loadAPI("libs/su.lua")
 
+sides = {"top", "bottom", "left", "right", "back", "front"}
+
 function getRunningProgram(shell)
   local name = getRunningProgramWithExtension(shell)
   local index = su.findLast(name, "%.")

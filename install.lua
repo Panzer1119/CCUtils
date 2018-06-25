@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:15 PM
+  Date: Edited 25 Jun 2018 - 08:30 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/install.lua
   
@@ -18,7 +18,7 @@ f.close()
 
 installed = true
 
-for i = 1, #files do
+for (i = 1, #files) do
 	print("")
 	local download = true
 	local file = files[i]
