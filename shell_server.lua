@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:23 PM
+  Date: Edited 25 Jun 2018 - 10:33 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/shell_server.lua
   
@@ -71,6 +71,14 @@ function reloadLists()
 	end
 end
 
+function getId(entry)
+	if (entry ~= nil) then
+		return entry.id
+	else
+		return nil
+	end
+end
+
 reloadLists()
 
 if (#args >= 1) then
@@ -81,6 +89,9 @@ rednet.host(protocol)
 
 while true do
 	local sid, msg, ptc = rednet.receive(protocol)
+	if ((#blacklist == 0 or not utils.arrayContains(blacklist, sid)) and (#whitelist == 0 or utils.tableArrayContains(whitelist, sid, getId))) then
+		
+	end
 end
 
 rednet.unhost(protocol)

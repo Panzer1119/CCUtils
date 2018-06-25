@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 10:30 PM
+  Date: Edited 25 Jun 2018 - 10:33 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -73,6 +73,19 @@ function arrayContains(array, object)
 	end
 	for i = 1, #array do
 		if (array[i] == object) then
+			return true
+		end
+	end
+	return false
+end
+
+function tableArrayContains(array, object, function_) then
+	filter = {startup = function_}
+	if (array == nil) then
+		return false
+	end
+	for i = 1, #array do
+		if (filter.startup(array[i]) == object) then
 			return true
 		end
 	end
