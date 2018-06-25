@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:52 PM
+  Date: Edited 25 Jun 2018 - 11:32 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/install.lua
   
@@ -77,6 +77,10 @@ else
 	write("do you want to try it again? (yes/n): ")
 	local input = read()
 	if (input == "yes") then
-		shell.run(shell.getRunningProgram())
+		if (overwrite) then
+			shell.run(shell.getRunningProgram() .. " yes")
+		else
+			shell.run(shell.getRunningProgram())
+		end
 	end
 end
