@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 11:27 PM
+  Date: Edited 25 Jun 2018 - 11:30 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/shell_server.lua
   
@@ -14,8 +14,8 @@ args = {...}
 
 protocol = "shell_server"
 
-whitelist = {programs_whitelist = {}, programs_blacklist = {}, computers = {}}
-blacklist = {}
+whitelist = {programs = {}, computers = {}}
+blacklist = {programs = {}, computers = {}}
 
 file_name_whitelist = "shell_server/whitelist.lon"
 file_name_blacklist = "shell_server/blacklist.lon"
@@ -95,10 +95,10 @@ function input(sid, msg, ptc)
 	local arguments = msg.arguments
 	local computer_whitelist = utils.getTableFromArray(whitelist, sid, getId)
 	local computer_blacklist = utils.getTableFromArray(blacklist, sid, getId)
-	local isOnGlobalBlacklist = (#blacklist.programs == 0) and false or utils.arrayContains(blacklist.programs, program)
-	local isOnGlobalWhitelist = (#whitelist.programs == 0) and true or utils.arrayContains(whitelist.programs, program)
-	local isOnLocalBlacklist = (computer_blacklist == nil or #computer_blacklist.programs == 0) and false or utils.arrayContains(computer_blacklist.programs, program)
-	local isOnLocalWhitelist = (computer_whitelist == nil or #computer_whitelist.programs == 0) and true or utils.arrayContains(computer_whitelist.programs, program)
+	local isOnGlobalBlacklist = (blacklist == nil or blacklist.programs == nil or #blacklist.programs == 0) and false or utils.arrayContains(blacklist.programs, program)
+	local isOnGlobalWhitelist = (whitelist == nil or whitelist.programs == nil or #whitelist.programs == 0) and true or utils.arrayContains(whitelist.programs, program)
+	local isOnLocalBlacklist = (computer_blacklist == nil or computer_blacklist.programs == nil or #computer_blacklist.programs == 0) and false or utils.arrayContains(computer_blacklist.programs, program)
+	local isOnLocalWhitelist = (computer_whitelist == nil or computer_whitelist.programs == nil or #computer_whitelist.programs == 0) and true or utils.arrayContains(computer_whitelist.programs, program)
 	if (not isOnLocalBlacklist and (isOnLocalWhitelist or (not isOnGlobalBlacklist and isOnGlobalWhitelist))) then
 		shell.run(program .. " " .. arguments)
 	else
