@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:47 PM
+  Date: Edited 25 Jun 2018 - 08:50 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/install.lua
   
@@ -36,7 +36,7 @@ for i = 1, #files do
 	if (file == nil or file.name == nil or file.path == nil or file.url == nil) then
 		print("Error with a file!")
 	else
-		if (~overwrite and fs.exists(file.path)) then
+		if (not overwrite and fs.exists(file.path)) then
 			download = false
 			print(file.name .. " is already installed,")
 			write("do you want to update it? (Y/n): ")
