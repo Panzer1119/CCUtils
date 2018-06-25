@@ -1,12 +1,14 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:38 PM
+  Date: Edited 25 Jun 2018 - 08:47 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/install.lua
   
   Direct Download: https://raw.githubusercontent.com/Panzer1119/CCUtils/master/install.lua
 ]]--
+
+args = {...}
 
 filename_files = "downloads/files.lon"
 print("Downloading " .. filename_files)
@@ -17,6 +19,14 @@ local f = fs.open(filename_files, "r")
 files = textutils.unserialise(f.readAll())
 f.close()
 
+overwrite = false
+
+if (#args >= 1) then
+	if (args[1] == "yes") then
+		overwrite = true
+	end
+end
+
 installed = true
 
 for i = 1, #files do
@@ -26,7 +36,7 @@ for i = 1, #files do
 	if (file == nil or file.name == nil or file.path == nil or file.url == nil) then
 		print("Error with a file!")
 	else
-		if (fs.exists(file.path)) then
+		if (~overwrite and fs.exists(file.path)) then
 			download = false
 			print(file.name .. " is already installed,")
 			write("do you want to update it? (Y/n): ")
