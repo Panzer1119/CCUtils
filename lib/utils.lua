@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:27 PM
+  Date: Edited 25 Jun 2018 - 10:30 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -65,4 +65,16 @@ function readAllFromFile(filename)
 	else
 		return nil
 	end
+end
+
+function arrayContains(array, object)
+	if (array == nil) then
+		return false
+	end
+	for i = 1, #array do
+		if (array[i] == object) then
+			return true
+		end
+	end
+	return false
 end
