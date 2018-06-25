@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 11 Jun 2018 - 07:52 PM
+  Date: Edited 25 Jun 2018 - 07:37 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/utils.lua
   
@@ -52,4 +52,15 @@ end
 
 function get2FAseed(salt)
 	return get2FAosTime(0.75) * su.sumString(salt)
+end
+
+function readAllFromFile(filename)
+	if (fs.exists(filename)) then
+		local f = fs.open(filename, "r")
+		local all = f.readAll()
+		f.close()
+		return all
+	else
+		return nil
+	end
 end
