@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:30 PM
+  Date: Edited 25 Jun 2018 - 08:34 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/install.lua
   
@@ -10,6 +10,7 @@
 
 filename_files = "downloads/files.lon"
 print("Downloading " .. filename_files)
+fs.delete(filename_files)
 shell.run("wget https://raw.githubusercontent.com/Panzer1119/CCUtils/master/files.lon " .. filename_files)
 
 local f = fs.open(filename_files, "r")
@@ -49,8 +50,8 @@ if (installed) then
 	write("(the installation file can be used to update the library) (Y/n): ")
 	local input = read()
 	if (input == "Y") then
-		shell.run("delete " .. filename_files)
-		shell.run("delete " .. shell.getRunningProgram())
+		fs.delete(filename_files)
+		fs.delete(shell.getRunningProgram())
 	end
 else
 	print("")
