@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 26 Jun 2018 - 03:23 AM
+  Date: Edited 26 Jun 2018 - 01:33 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/shell_server.lua
   
@@ -73,12 +73,12 @@ Example blacklist file:
 
 function reloadLists()
 	if (fs.exists(file_name_whitelist)) then
-		whitelist = textutils.unserialise(utils.readAllFromFile(file_name_whitelist))
+		whitelist = utils.readTableFromFile(file_name_whitelist)
 	else
 		whitelist = {programs = {}, computers = {}}
 	end
 	if (fs.exists(file_name_blacklist)) then
-		blacklist = textutils.unserialise(utils.readAllFromFile(file_name_blacklist))
+		blacklist = utils.readTableFromFile(file_name_blacklist)
 	else
 		blacklist = {programs = {}, computers = {}}
 	end
@@ -96,6 +96,7 @@ function input(sid, msg, ptc)
 	local program = msg.program
 	if (program ~= nil) then
 		local arguments = (msg.arguments == nil) and "" or msg.arguments
+		local id_response = msg.responseId
 		print("Program call from " .. sid .. ": " .. program)
 		if (arguments ~= "") then
 			print("With arguments: " .. arguments)
@@ -114,6 +115,7 @@ function input(sid, msg, ptc)
 		local isOnGlobalWhitelist = (whitelist == nil or whitelist.programs == nil or #whitelist.programs == 0) and true or utils.arrayContains(whitelist.programs, program)
 		print("5")
 		--print("5 isOnGlobalWhitelist = " .. isOnGlobalWhitelist)
+		--[[
 		if (computer_blacklist ~= nil) then
 			print("5.1")
 			if (computer_blacklist.programs ~= nil) then
@@ -123,21 +125,28 @@ function input(sid, msg, ptc)
 				end
 			end
 		end
+		]]--
+		local isOnLocalBlacklist = false
+		local isOnLocalWhitelist = false
+		--[[
 		local isOnLocalBlacklist = (computer_blacklist == nil) and false or ((computer_blacklist.programs == nil) and false or ((#computer_blacklist.programs == 0) and false or utils.arrayContains(computer_blacklist.programs, program)))
 		print("6")
 		print("6 isOnLocalBlacklist = " .. isOnLocalBlacklist)
 		local isOnLocalWhitelist = (computer_whitelist == nil or computer_whitelist.programs == nil or #computer_whitelist.programs == 0) and true or utils.arrayContains(computer_whitelist.programs, program)
 		print("7")
 		print("7 isOnLocalWhitelist = " .. isOnLocalWhitelist)
+		]]--
 		if (not isOnLocalBlacklist and (isOnLocalWhitelist or (not isOnGlobalBlacklist and isOnGlobalWhitelist))) then
-			local success = shell.run(program .. " " .. arguments)
+			local exec = program .. ((arguments ~= "" and " " .. arguments or ""))
+			print("Computer will exec: \"" .. exec .. "\"")
+			local success = pcall(shell.run, exec)
 			print("Program call from " .. sid .. " was successful: " .. success)
 			sleep(0.1)
-			rednet.send(sid, success, ptc)
+			rednet.send(sid, {responseId = id_response, success = success, extra = nil}, ptc)
 		else
 			print("Program call from " .. sid .. " was rejected")
 			sleep(0.1)
-			rednet.send(sid, "Program is blocked for you", ptc)
+			rednet.send(sid, {responseId = id_response, success = false, extra = "Program is blocked for you"}, ptc)
 		end
 		print("")
 	end
@@ -165,7 +174,7 @@ while true do
 		pcall(input, sid, msg, ptc)
 	else
 		sleep(0.1)
-		rednet.send(sid, "Access denied", ptc)
+		rednet.send(sid, {responseId = msg.responseId, success = false, extra = "Access denied"}, ptc)
 	end
 end
 
