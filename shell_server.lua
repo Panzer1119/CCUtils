@@ -1,7 +1,7 @@
 --[[
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 11:30 PM
+  Date: Edited 26 Jun 2018 - 02:37 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/shell_server.lua
   
@@ -9,10 +9,12 @@
 ]]--
 
 os.loadAPI("lib/utils.lua")
+os.loadAPI("lib/rednet_utils.lua")
 
 args = {...}
 
-protocol = "shell_server"
+protocol = "ss"
+hostname = "shell_server"
 
 whitelist = {programs = {}, computers = {}}
 blacklist = {programs = {}, computers = {}}
@@ -108,11 +110,16 @@ end
 
 reloadLists()
 
-if (#args >= 1) then
+if (#args >= 1 and args[1] ~= nil) then
 	protocol = args[1]
+	if (#args >= 2 and args[2] ~= nil) then
+		hostname = args[2]
+	end
 end
 
-rednet.host(protocol)
+local side_modem = rednet_utils.openFirstModemFound()
+
+rednet.host(protocol, hostname)
 
 while true do
 	local sid, msg, ptc = rednet.receive(protocol)
@@ -123,4 +130,8 @@ while true do
 	end
 end
 
-rednet.unhost(protocol)
+rednet.unhost(protocol, hostname)
+
+if (side_modem ~= nil) then
+	rednet.close(side_modem)
+end

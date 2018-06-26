@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 10:41 PM
+  Date: Edited 26 Jun 2018 - 02:40 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -79,7 +79,7 @@ function arrayContains(array, object)
 	return false
 end
 
-function tableArrayContains(array, object, function_) then
+function tableArrayContains(array, object, function_)
 	filter = {startup = function_}
 	if (array == nil) then
 		return false
@@ -92,7 +92,7 @@ function tableArrayContains(array, object, function_) then
 	return false
 end
 
-function getTableFromArray(array, object, function_) then
+function getTableFromArray(array, object, function_)
 	filter = {startup = function_}
 	if (array == nil) then
 		return nil
