@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 26 Jun 2018 - 01:35 PM
+  Date: Edited 26 Jun 2018 - 01:41 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -85,7 +85,7 @@ function writeAllToFile(filename, data)
 end
 
 function writeTableToFile(filename, table_)
-	writeAllToFile(filename, textutils.serliaise(table_))
+	writeAllToFile(filename, textutils.serialise(table_))
 end
 
 function arrayContains(array, object)
