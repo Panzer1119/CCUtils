@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 26 Jun 2018 - 02:40 PM
+  Date: Edited 26 Jun 2018 - 03:22 AM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -10,7 +10,7 @@
 
 ]]--
 
-os.loadAPI("libs/su.lua")
+os.loadAPI("lib/su.lua")
 
 sides = {"top", "bottom", "left", "right", "back", "front"}
 
@@ -38,6 +38,13 @@ end
 
 function exit()
 	error()
+end
+
+function clear(x, y)
+	x = (x == nil) and 1 or x
+	y = (y == nil) and 1 or y
+	term.clear()
+	term.setCursorPos(x, y)
 end
 
 function get2FAosTime1s()  --changes every ~1 second
@@ -68,7 +75,7 @@ function readAllFromFile(filename)
 end
 
 function arrayContains(array, object)
-	if (array == nil) then
+	if (array == nil or #array == 0) then
 		return false
 	end
 	for i = 1, #array do
@@ -81,7 +88,7 @@ end
 
 function tableArrayContains(array, object, function_)
 	filter = {startup = function_}
-	if (array == nil) then
+	if (array == nil or #array == 0) then
 		return false
 	end
 	for i = 1, #array do
@@ -94,7 +101,7 @@ end
 
 function getTableFromArray(array, object, function_)
 	filter = {startup = function_}
-	if (array == nil) then
+	if (array == nil or #array == 0) then
 		return nil
 	end
 	for i = 1, #array do

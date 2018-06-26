@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 25 Jun 2018 - 08:27 PM
+  Date: Edited 26 Jun 2018 - 02:49 AM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/su.lua
   
@@ -21,7 +21,7 @@ function isEmpty(s)
 end
 
 function findLast(haystack, needle)
-    local i = haystack:match(".*"..needle.."()")
+    local i = haystack:match(".*" .. needle .. "()")
     if i == nil then return nil else return i-1 end
 end
 
