@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 26 Jun 2018 - 01:32 PM
+  Date: Edited 26 Jun 2018 - 01:35 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -76,6 +76,16 @@ end
 
 function readTableFromFile(filename)
 	return textutils.unserialise(readAllFromFile(filename))
+end
+
+function writeAllToFile(filename, data)
+	local f = fs.open(filename, "w")
+	f.write(data)
+	f.close()
+end
+
+function writeTableToFile(filename, table_)
+	writeAllToFile(filename, textutils.serliaise(table_))
 end
 
 function arrayContains(array, object)
