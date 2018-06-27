@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 26 Jun 2018 - 01:41 PM
+  Date: Edited 27 Jun 2018 - 06:51 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -124,4 +124,38 @@ function getTableFromArray(array, object, function_)
 		end
 	end
 	return nil
+end
+
+function getTableIndexFromArray(array, object, function_)
+	filter = {startup = function_}
+	if (array == nil or #array == 0) then
+		return nil
+	end
+	for i = 1, #array do
+		if (filter.startup(array[i]) == object) then
+			return i
+		end
+	end
+	return nil
+end
+
+function resetAllRedstoneOutputs()
+	for i = 1, #sides do
+		rs.setOutput(sides[i], false)
+	end
+end
+
+function concatArrays(array1, array2)
+	local output = array1
+	for i = 1, #array2 do
+		output[#array1 + i] = array2[i]
+	end
+	return output
+end
+
+function duration(function_)
+	local block = {startup = function_}
+	local starttime = os.time()
+	block.startup()
+	return os.time() - starttime
 end
