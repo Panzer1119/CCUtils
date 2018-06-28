@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 29 Jun 2018 - 01:41 AM
+  Date: Edited 29 Jun 2018 - 01:45 AM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/su.lua
   
@@ -62,7 +62,7 @@ function randomString(charset, length)
     if not length or length <= 0 then return '' end
 	if length >= 245 then return nil end
     math.randomseed(os.clock()^5)
-    return randomString(length - 1) .. charset[math.random(1, #charset)]
+    return randomString(charset, length - 1) .. charset[math.random(1, #charset)]
 end
 
 function sumString(text)
