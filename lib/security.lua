@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 29 Jun 2018 - 10:47 PM
+  Date: Edited 29 Jun 2018 - 09:14 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/security.lua
   
@@ -29,18 +29,42 @@ function genNormalMod()
 end
 
 function genNormalKey()
-	local key = {mult=nil, mod = nil}
+	local key = {mult_1=nil, mult_2=nil, mod = nil}
 	key.mult = genNormalMult()
 	sleep(math.random(0.2, 1))
 	key.mod = genNormalMod()
 	return key
 end
 
-function gen2FACode(mult, mod)
-	if (mult ~= nil and mod ~= nil) then
-		return ((getFlooredTime() * mult) % mod)
-	elseif (mult ~= nil) then
-		return gen2FACode(mult.mult, mult.mod)
+function gen2FACode(mult_1, mult_2, mod)
+	if (mult_1 ~= nil and mult_2 ~= nil and mod ~= nil) then
+		return ((((getFlooredTime() * mult_1) % os.day()) * mult_2) % mod)
+	elseif (mult_1 ~= nil) then
+		return gen2FACode(mult_1.mult_1, mult_1.mult_2, mult_1.mod)
+	else
+		return nil
+	end
+end
+
+function isValid2FACode(mult_1, mult_2, mod, code, usedCodes)
+	if (mult_1 ~= nil and mult_2 ~= nil and mod ~= nil and code ~= nil) then
+		local code_ = gen2FACode(mult_1, mult_2, mod)
+		if (code_ ~= code) then
+			return false
+		else
+			if (usedCodes == nil) then
+				return true
+			else
+				if (#usedCodes == 0) then
+					usedCodes[1] = code
+					return true
+				end
+				utils.addToArray(usedCodes, code)
+				return not utils.containsArray(usedCodes, code)
+			end
+		end
+	elseif (mult_1 ~= nil and code~= nil) then
+		return isValid2FACode(mult_1.mult_1, mult_1.mult_2, mult_1.mod, code)
 	else
 		return nil
 	end
