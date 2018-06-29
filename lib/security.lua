@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 29 Jun 2018 - 10:36 PM
+  Date: Edited 29 Jun 2018 - 10:47 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/security.lua
   
@@ -12,7 +12,7 @@
 
 os.loadAPI("lib/utils.lua")
 
-timeMultiplier = 40
+timeMultiplier = 100
 
 function getFlooredTime()
 	return math.floor(os.time() * timeMultiplier)
@@ -28,6 +28,20 @@ function genNormalMod()
 	return math.abs(math.random(300000, 1000000))
 end
 
+function genNormalKey()
+	local key = {mult=nil, mod = nil}
+	key.mult = genNormalMult()
+	sleep(math.random(0.2, 1))
+	key.mod = genNormalMod()
+	return key
+end
+
 function gen2FACode(mult, mod)
-	return ((getFlooredTime() * mult) % mod)
+	if (mult ~= nil and mod ~= nil) then
+		return ((getFlooredTime() * mult) % mod)
+	elseif (mult ~= nil) then
+		return gen2FACode(mult.mult, mult.mod)
+	else
+		return nil
+	end
 end
