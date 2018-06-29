@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 29 Jun 2018 - 02:28 AM
+  Date: Edited 29 Jun 2018 - 02:32 AM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -146,7 +146,7 @@ function resetAllRedstoneOutputs()
 end
 
 function concatArrays(array1, array2)
-	local output = array1
+	local output = copyArray(array1)
 	for i = 1, #array2 do
 		output[#array1 + i] = array2[i]
 	end
