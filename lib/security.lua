@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 29 Jun 2018 - 09:14 PM
+  Date: Edited 29 Jun 2018 - 09:15 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/security.lua
   
@@ -30,7 +30,9 @@ end
 
 function genNormalKey()
 	local key = {mult_1=nil, mult_2=nil, mod = nil}
-	key.mult = genNormalMult()
+	key.mult_1 = genNormalMult()
+	sleep(math.random(0.2, 1))
+	key.mult_2 = genNormalMult()
 	sleep(math.random(0.2, 1))
 	key.mod = genNormalMod()
 	return key
