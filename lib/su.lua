@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 29 Jun 2018 - 02:22 AM
+  Date: Edited 29 Jun 2018 - 02:28 AM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/su.lua
   
@@ -74,20 +74,4 @@ function sumString(text)
 		sum = sum + charset_big_alpha_numerical_inverse[c]
 	end
 	return sum
-end
-
-function addToArray(array, object)
-	if (array == nil) then
-		return nil
-	end
-	array[#array + 1] = object
-	return array
-end
-
-function copyArray(array)
-	local array_new = {}
-	for i = 1, #array do
-		array_new[i] = array[i]
-	end
-	return array_new
 end
