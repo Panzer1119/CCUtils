@@ -2,7 +2,7 @@
 
   Author: Panzer1119
   
-  Date: Edited 29 Jun 2018 - 02:32 AM
+  Date: Edited 10 Jul 2019 - 09:45 PM
   
   Original Source: https://github.com/Panzer1119/CCUtils/blob/master/lib/utils.lua
   
@@ -11,6 +11,7 @@
 ]]--
 
 os.loadAPI("lib/su.lua")
+os.loadAPI("lib/time_utils.lua")
 
 sides = {"top", "bottom", "left", "right", "back", "front"}
 
